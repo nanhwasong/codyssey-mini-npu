@@ -211,13 +211,19 @@ def run_mode2():
 
             filter_group = filters[filter_key]
 
-            if "cross" not in filter_group or "x" not in filter_group:
+            normalized_filters = {}
+
+            for raw_label, filter_matrix in filter_group.items():
+                normalized_label = normalize_label(raw_label)
+                normalized_filters[normalized_label] = filter_matrix
+
+            if "Cross" not in normalized_filters or "X" not in normalized_filters:
                 raise ValueError(
-                    "cross 또는 x 필터가 없습니다."
+                    "Cross 또는 X 필터가 없습니다."
                 )
 
-            cross_filter = filter_group["cross"]
-            x_filter = filter_group["x"]
+            cross_filter = normalized_filters["Cross"]
+            x_filter = normalized_filters["X"]
 
             pattern = case.get("input")
             expected = normalize_label(case.get("expected"))
