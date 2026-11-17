@@ -272,6 +272,8 @@ def run_mode2():
                 (pattern_key, str(error))
             )
 
+    show_performance_analysis([3, 5, 13, 25])
+
     print("\n=== 결과 요약 ===")
     print(f"총 테스트: {total_count}")
     print(f"통과: {pass_count}")
@@ -282,7 +284,6 @@ def run_mode2():
 
         for case_id, reason in fail_cases:
             print(f"- {case_id}: {reason}")
-    show_performance_analysis([3, 5, 13, 25])
 
 def run_mode1():
     print("\n=== 모드 1: 사용자 입력 (3x3) ===")
