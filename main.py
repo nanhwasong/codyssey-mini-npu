@@ -76,6 +76,51 @@ def make_cross_pattern(size):
     return matrix
 
 
+def make_x_pattern(size):
+    """size x size 크기의 X 패턴을 만든다."""
+    matrix = [[0 for _ in range(size)] for _ in range(size)]
+
+    for i in range(size):
+        matrix[i][i] = 1
+        matrix[i][size - 1 - i] = 1
+
+    return matrix
+
+def print_pattern(pattern):
+    """2차원 패턴을 보기 좋게 출력한다."""
+    for row in pattern:
+        print(" ".join(str(value) for value in row))
+
+
+def run_pattern_generator():
+    """사용자가 입력한 크기의 Cross와 X 패턴을 자동 생성한다."""
+    print("\n=== BONUS: 패턴 자동 생성기 ===")
+
+    while True:
+        user_input = input("패턴 크기 N을 입력하세요: ").strip()
+
+        try:
+            size = int(user_input)
+        except ValueError:
+            print("입력 오류: 정수를 입력하세요.")
+            continue
+
+        if size < 3:
+            print("입력 오류: 3 이상의 숫자를 입력하세요.")
+            continue
+
+        break
+
+    cross_pattern = make_cross_pattern(size)
+    x_pattern = make_x_pattern(size)
+
+    print(f"\n=== Cross {size}x{size} ===")
+    print_pattern(cross_pattern)
+
+    print(f"\n=== X {size}x{size} ===")
+    print_pattern(x_pattern)
+
+
 def show_performance_analysis(sizes):
     """크기별 MAC 평균 시간과 연산 횟수를 출력한다."""
     print("\n=== 성능 분석 ===")
@@ -328,6 +373,7 @@ def show_menu():
     print("==============================")
     print("1. 사용자 입력 모드 (3x3)")
     print("2. data.json 분석 모드")
+    print("3. 패턴 자동 생성기 (BONUS)")
     print("0. 종료")
     print("==============================")
 
@@ -344,12 +390,15 @@ def main():
         elif choice == "2":
             run_mode2()
 
+        elif choice == "3":
+            run_pattern_generator()
+
         elif choice == "0":
             print("\n프로그램을 종료합니다.")
             break
 
         else:
-            print("\n입력 오류: 0, 1, 2 중 하나를 입력하세요.")
+            print("\n입력 오류: 0, 1, 2, 3 중 하나를 입력하세요.")
 
 
 if __name__ == "__main__":
